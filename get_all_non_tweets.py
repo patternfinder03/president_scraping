@@ -12,6 +12,11 @@ titles = []
 dates = []
 contents = []
 citations = []
+presidents = []
+categories_list = []
+attributes_list = []
+locations = []
+document_links = []
 
 # Function to safely convert date string to datetime object
 def parse_date(date_str):
@@ -62,11 +67,43 @@ for link in links:
             citation_tag = soup.find('div', class_='field-prez-document-citation')
             citation = citation_tag.get_text(strip=True) if citation_tag else 'N/A'
 
+            # Find president name
+            president_tag = soup.find('div', class_='field-title')
+            president_name = president_tag.get_text(strip=True) if president_tag else 'N/A'
+
+            # Find categories
+            categories_section = soup.find('h3', text='Categories')
+            categories = []
+            if categories_section:
+                categories_tags = categories_section.find_next_siblings('div')
+                categories = [cat.get_text(strip=True) for cat in categories_tags]
+            categories_combined = ', '.join(categories) if categories else 'N/A'
+
+            # Find attributes
+            attributes_section = soup.find('h3', text='Attributes')
+            attributes = []
+            if attributes_section:
+                attributes_tags = attributes_section.find_next_siblings('div')
+                attributes = [attr.get_text(strip=True) for attr in attributes_tags]
+            attributes_combined = ', '.join(attributes) if attributes else 'N/A'
+
+            # Find location
+            location_tag = soup.find('div', class_='field-docs-location')
+            location = location_tag.find('div', class_='field-spot-state').get_text(strip=True) if location_tag else 'N/A'
+
             # Append extracted data to lists
             titles.append(title)
             dates.append(date)
             contents.append(content_combined)
             citations.append(citation)
+            presidents.append(president_name)
+            categories_list.append(categories_combined)
+            attributes_list.append(attributes_combined)
+            locations.append(location)
+            document_links.append(link)  # Store the link as well
+            
+            # if len(locations) > 10:
+            #     break
 
         except requests.exceptions.RequestException as req_err:
             print(f"Request error: {req_err} for link: {link}")
@@ -78,7 +115,12 @@ document_data = pd.DataFrame({
     'Title': titles,
     'Date': dates,
     'Content': contents,
-    'Citation': citations
+    'Citation': citations,
+    'President': presidents,
+    'Categories': categories_list,
+    'Attributes': attributes_list,
+    'Location': locations,
+    'Link': document_links  # Add the link column
 })
 
 # Save the DataFrame to a CSV file
