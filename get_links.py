@@ -40,6 +40,9 @@ def scrape_presidency_links(base_urls_with_max_pages):
     with open("document_links.txt", "w") as file:
         for link in all_links:
             file.write(link + "\n")
+    # with open("document_links.txt", "a") as file:
+    #     for link in all_links:
+    #         file.write(link + "\n")
 
     print(f"Total links collected: {len(all_links)}")
     print("All links have been saved to document_links.txt")
@@ -47,10 +50,11 @@ def scrape_presidency_links(base_urls_with_max_pages):
 # List of base URLs with the corresponding max number of pages to scrape
 # Format: [(base_url_1, max_pages_1), (base_url_2, max_pages_2), ...]
 base_urls_with_max_pages = [
-    ("https://www.presidency.ucsb.edu/advanced-search?field-keywords=&field-keywords2=&field-keywords3=&from%5Bdate%5D=&to%5Bdate%5D=&person2=200301&items_per_page=25&page=", 482),
-    ("https://www.presidency.ucsb.edu/advanced-search?field-keywords=&field-keywords2=&field-keywords3=&from%5Bdate%5D=&to%5Bdate%5D=&person2=200320&items_per_page=25&page=", 627),
-    ("https://www.presidency.ucsb.edu/advanced-search?field-keywords=&field-keywords2=&field-keywords3=&from%5Bdate%5D=&to%5Bdate%5D=&person2=200300&items_per_page=25&page=", 741),
-    ("https://www.presidency.ucsb.edu/advanced-search?field-keywords=&field-keywords2=&field-keywords3=&from%5Bdate%5D=&to%5Bdate%5D=&person2=200297&items_per_page=25&page=", 291)
+    # ("https://www.presidency.ucsb.edu/advanced-search?field-keywords=&field-keywords2=&field-keywords3=&from%5Bdate%5D=&to%5Bdate%5D=&person2=200301&items_per_page=25&page=", 482),
+    # ("https://www.presidency.ucsb.edu/advanced-search?field-keywords=&field-keywords2=&field-keywords3=&from%5Bdate%5D=&to%5Bdate%5D=&person2=200320&items_per_page=25&page=", 627),
+    # ("https://www.presidency.ucsb.edu/advanced-search?field-keywords=&field-keywords2=&field-keywords3=&from%5Bdate%5D=&to%5Bdate%5D=&person2=200300&items_per_page=25&page=", 741),
+    # ("https://www.presidency.ucsb.edu/advanced-search?field-keywords=&field-keywords2=&field-keywords3=&from%5Bdate%5D=&to%5Bdate%5D=&person2=200297&items_per_page=25&page=", 291),
+    ("https://www.presidency.ucsb.edu/advanced-search?field-keywords=&field-keywords2=&field-keywords3=&from%5Bdate%5D=&to%5Bdate%5D=&person2=200298&items_per_page=25&page=", 641),
 ]
 
 # Call the function to start scraping
